@@ -1,87 +1,116 @@
 import React from "react";
+import { appellations, county } from "../../../constants/data";
+
+function Input({ inputID, label, type, placeholder }) {
+  return (
+    <>
+      <label htmlFor={inputID} className="input-label">
+        {label}
+      </label>
+      {/* !!! 改 block */}
+      <input type={type} placeholder={placeholder} id={inputID} />
+    </>
+  );
+}
+
+function Select({ selectID, label, optionData }) {
+  const optionList = optionData.map((option) => (
+    <option
+      key={option.value}
+      value={option.value}
+      disabled={option.value === "" ? true : false}
+    >
+      {option.content}
+    </option>
+  ));
+
+  return (
+    <>
+      <div className="input-label" htmlFor={selectID}>
+        {label}
+      </div>
+      <div className="select-container">
+        <select id={selectID} defaultValue="" required>
+          {optionList}
+        </select>
+      </div>
+    </>
+  );
+}
 
 function Part1() {
+  const inputType = {
+    fullName: {
+      inputID: "input_name",
+      label: "姓名",
+      type: "text",
+      placeholder: "請輸入姓名",
+    },
+    telephone: {
+      inputID: "input_phone",
+      label: "電話",
+      type: "tel",
+      placeholder: "請輸入行動電話",
+    },
+    email: {
+      inputID: "input_email",
+      label: "Email",
+      type: "email",
+      placeholder: "請輸入電子郵件",
+    },
+    address: {
+      inputID: "input_address",
+      label: "地址",
+      type: "text",
+      placeholder: "請輸入地址",
+    },
+  };
+
   return (
     <>
       {/* <!-- address phase --> */}
-      <form class="col col-12" data-phase="address">
-        <h3 class="form-title">寄送地址</h3>
-        <section class="form-body col col-12">
+      <form className="col col-12" data-phase="address">
+        <h3 className="form-title">寄送地址</h3>
+        <section className="form-body col col-12">
           {/* 第一行 */}
-          <div class="col col-12">
-            <div class="input-group input-w-lg-2 input-w-sm-s1">
-              <div class="input-label">稱謂</div>
-              <div class="select-container">
-                <select>
-                  <option value="mr" selected>
-                    先生
-                  </option>
-                  <option value="ms">女士</option>
-                  <option value="mx">不明</option>
-                </select>
-              </div>
+          <div className="col col-12">
+            <div className="input-group input-w-lg-2 input-w-sm-s1">
+              <Select
+                selectID="select-appellations"
+                label="稱謂"
+                optionData={appellations}
+              />
             </div>
 
-            <div class="input-group input-w-lg-4 input-w-sm-s2">
-              <div class="input-label">姓名</div>
-              <input type="text" placeholder="請輸入姓名" />
+            <div className="input-group input-w-lg-4 input-w-sm-s2">
+              <Input {...inputType.fullName} />
             </div>
           </div>
           {/* 第一行end */}
+
           {/* 第二行 */}
-          <div class="col col-12">
-            <div class="input-group input-w-lg-3 input-w-sm-full">
-              <div class="input-label">電話</div>
-              <input type="tel" placeholder="請輸入行動電話" />
+          <div className="col col-12">
+            <div className="input-group input-w-lg-3 input-w-sm-full">
+              <Input {...inputType.telephone} />
             </div>
-            <div class="input-group input-w-lg-3 input-w-sm-full">
-              <div class="input-label">Email</div>
-              <input type="email" placeholder="請輸入電子郵件" />
+
+            <div className="input-group input-w-lg-3 input-w-sm-full">
+              <Input {...inputType.email} />
             </div>
           </div>
           {/* 第二行end */}
+
           {/* 第三行 */}
-          <div class="col col-12">
-            <div class="input-group input-w-lg-2 input-w-sm-full">
-              <div class="input-label">縣市</div>
-              <div class="select-container">
-                <select required>
-                  <option value="">請選擇縣市</option>
-                  <option value="KLU">基隆市</option>
-                  <option value="TPH">新北市</option>
-                  <option value="TPE">臺北市</option>
-                  <option value="TYC">桃園市</option>
-                  <option value="HSH">新竹縣</option>
-                  <option value="HSC">新竹市</option>
-                  <option value="MAC">苗栗市</option>
-                  <option value="MAL">苗栗縣</option>
-                  <option value="TXG">臺中市</option>
-                  <option value="CWH">彰化縣</option>
-                  <option value="CWS">彰化市</option>
-                  <option value="NTC">南投市</option>
-                  <option value="NTO">南投縣</option>
-                  <option value="YLH">雲林縣</option>
-                  <option value="CHY">嘉義縣</option>
-                  <option value="CYI">嘉義市</option>
-                  <option value="TNN">臺南市</option>
-                  <option value="KHH">高雄市</option>
-                  <option value="IUH">屏東縣</option>
-                  <option value="PTS">屏東市</option>
-                  <option value="ILN">宜蘭縣</option>
-                  <option value="ILC">宜蘭市</option>
-                  <option value="HWA">花蓮縣</option>
-                  <option value="HWC">花蓮市</option>
-                  <option value="TTC">臺東市</option>
-                  <option value="TTT">臺東縣</option>
-                  <option value="PEH">澎湖縣</option>
-                  <option value="KMN">金門縣</option>
-                  <option value="LNN">連江縣</option>
-                </select>
-              </div>
+          <div className="col col-12">
+            <div className="input-group input-w-lg-2 input-w-sm-full">
+              <Select
+                selectID="select-county"
+                label="縣市"
+                optionData={county}
+              />
             </div>
-            <div class="input-group input-w-lg-4 input-w-sm-full">
-              <div class="input-label">地址</div>
-              <input type="text" placeholder="請輸入地址" />
+            <div className="input-group input-w-lg-4 input-w-sm-full">
+              <Input {...inputType.address} />
             </div>
           </div>
           {/* 第三行end */}
