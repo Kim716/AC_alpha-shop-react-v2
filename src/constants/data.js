@@ -1,0 +1,41 @@
+const appellations = [
+  { value: "", content: "請選擇稱謂" },
+  { value: "mr", content: "先生" },
+  { value: "ms", content: "女士" },
+  { value: "mx", content: "不明" },
+];
+
+const county = [
+  { value: "", content: "請選擇縣市" },
+  { value: "KLU", content: "基隆市" },
+  { value: "TPH", content: "新北市" },
+  { value: "TPE", content: "臺北市" },
+  { value: "TYC", content: "桃園市" },
+  { value: "HSH", content: "新竹縣" },
+  { value: "HSC", content: "新竹市" },
+  { value: "MAC", content: "苗栗市" },
+  { value: "MAL", content: "苗栗縣" },
+  { value: "TXG", content: "臺中市" },
+  { value: "CWH", content: "彰化縣" },
+  { value: "CWS", content: "彰化市" },
+  { value: "NTC", content: "南投市" },
+  { value: "NTO", content: "南投縣" },
+  { value: "YLH", content: "雲林縣" },
+  { value: "CHY", content: "嘉義縣" },
+  { value: "CYI", content: "嘉義市" },
+  { value: "TNN", content: "臺南市" },
+  { value: "KHH", content: "高雄市" },
+  { value: "IUH", content: "屏東縣" },
+  { value: "PTS", content: "屏東市" },
+  { value: "ILN", content: "宜蘭縣" },
+  { value: "ILC", content: "宜蘭市" },
+  { value: "HWA", content: "花蓮縣" },
+  { value: "HWC", content: "花蓮市" },
+  { value: "TTC", content: "臺東市" },
+  { value: "TTT", content: "臺東縣" },
+  { value: "PEH", content: "澎湖縣" },
+  { value: "KMN", content: "金門縣" },
+  { value: "LNN", content: "連江縣" },
+];
+
+export {appellations, county};
