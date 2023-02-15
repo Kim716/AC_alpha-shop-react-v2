@@ -5,8 +5,12 @@ import Cart from "./Cart";
 function Main() {
   return (
     <>
-      <Step />
-      <Cart />
+      <main class="site-main">
+        <div class="main-container">
+          <Step />
+          <Cart />
+        </div>
+      </main>
     </>
   );
 }
