@@ -1,23 +1,24 @@
 import React from "react";
 import ProductList from "./ProductList";
 
+function CartInfo({ type, title, price }) {
+  return (
+    <section className={`cart-info ${type} col col-12`}>
+      <div className="text">{title}</div>
+      <div className="price">{price}</div>
+    </section>
+  );
+}
+
 function Cart() {
   return (
     <>
       {/* <!-- cart --> */}
-      <section class="cart-container col col-lg-5 col-sm-12">
-        <h3 class="cart-title">購物籃</h3>
-
+      <section className="cart-container col col-lg-5 col-sm-12">
+        <h3 className="cart-title">購物籃</h3>
         <ProductList />
-
-        <section class="cart-info shipping col col-12">
-          <div class="text">運費</div>
-          <div class="price"></div>
-        </section>
-        <section class="cart-info total col col-12">
-          <div class="text">小計</div>
-          <div class="price"></div>
-        </section>
+        <CartInfo type="shipping" title="運費" price={123} />
+        <CartInfo type="total" title="小計" price={123} />
       </section>
     </>
   );
