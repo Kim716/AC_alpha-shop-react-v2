@@ -1,5 +1,5 @@
 import React from "react";
-import { appellations, county } from "../../../constants/data";
+import { appellations, county } from "../../../constants/formdata";
 
 function Input({ inputID, label, type, placeholder }) {
   return (

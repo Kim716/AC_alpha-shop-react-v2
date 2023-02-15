@@ -38,4 +38,4 @@ const county = [
   { value: "LNN", content: "連江縣" },
 ];
 
-export {appellations, county};
+export { appellations, county };
