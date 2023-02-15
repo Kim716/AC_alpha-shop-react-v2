@@ -15,7 +15,7 @@ function PrevButton() {
   return (
     <button className="prev">
       上一步
-      <img src={iconLeftArrow} alt="iconLeftArrow" />{" "}
+      <img src={iconLeftArrow} alt="iconLeftArrow" />
       {/*!!! button 設計時要穿透他有 cursor */}
     </button>
   );
