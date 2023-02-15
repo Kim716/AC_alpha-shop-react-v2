@@ -8,11 +8,21 @@ import Controller from "./Controller";
 function Step() {
   return (
     <>
-      <Progress />
-      <Part1 />
-      <Part2 />
-      <Part3 />
-      <Controller />
+      {/* <!-- register --> */}
+      <section
+        className="register-container col col-lg-6 col-sm-12"
+        data-phase="1"
+        data-total-price="0"
+      >
+        <Progress />
+        {/* <!-- register-form --> */}
+        <section className="form-container col col-12">
+          <Part1 />
+          <Part2 />
+          <Part3 />
+        </section>
+        <Controller />
+      </section>
     </>
   );
 }
