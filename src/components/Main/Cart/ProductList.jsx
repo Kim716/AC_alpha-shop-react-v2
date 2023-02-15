@@ -8,28 +8,36 @@ function Product() {}
 function ProductList() {
   const listItems = cartItems.map((item) => (
     <div
-      class="product-container col col-12"
+      className="product-container col col-12"
       data-count={item.quantity}
       data-price={item.price}
       key={item.id}
     >
-      <img class="img-container" src={item.img} alt={item.name} />
-      <div class="product-info">
-        <div class="product-name">{item.name}</div>
-        <div class="product-control-container">
-          <div class="product-control">
-            <img src={iconMinus} alt="iconMinus" class="product-action minus" />
-            <span class="product-count">{item.quantity}</span>
-            <img src={iconPlus} alt="iconPlus" class="product-action plus" />
+      <img className="img-container" src={item.img} alt={item.name} />
+      <div className="product-info">
+        <div className="product-name">{item.name}</div>
+        <div className="product-control-container">
+          <div className="product-control">
+            <img
+              src={iconMinus}
+              alt="iconMinus"
+              className="product-action minus"
+            />
+            <span className="product-count">{item.quantity}</span>
+            <img
+              src={iconPlus}
+              alt="iconPlus"
+              className="product-action plus"
+            />
           </div>
         </div>
-        <div class="price">{item.price}</div>
+        <div className="price">{item.price}</div>
       </div>
     </div>
   ));
 
   return (
-    <section class="product-list col col-12" data-total-price="0">
+    <section className="product-list col col-12" data-total-price="0">
       {listItems}
     </section>
   );
