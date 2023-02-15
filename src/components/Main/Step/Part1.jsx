@@ -121,3 +121,4 @@ function Part1() {
 }
 
 export default Part1;
+export { Input };
