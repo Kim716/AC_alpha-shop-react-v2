@@ -7,7 +7,6 @@ function Input({ inputID, label, type, placeholder }) {
       <label htmlFor={inputID} className="input-label">
         {label}
       </label>
-      {/* !!! 改 block */}
       <input type={type} placeholder={placeholder} id={inputID} />
     </>
   );

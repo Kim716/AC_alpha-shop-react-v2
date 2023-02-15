@@ -7,7 +7,6 @@ function NextButton() {
     <button className="next">
       下一步
       <img src={iconRightArrow} alt="iconRightArrow" />
-      {/*!!! button 設計時要穿透他有 cursor */}
     </button>
   );
 }
@@ -16,7 +15,6 @@ function PrevButton() {
     <button className="prev">
       上一步
       <img src={iconLeftArrow} alt="iconLeftArrow" />
-      {/*!!! button 設計時要穿透他有 cursor */}
     </button>
   );
 }

@@ -7,12 +7,7 @@ function ProgressGroup({ phase, order, label }) {
       <span className="progress-group" data-phase={phase}>
         <span className="progress-icon">
           <span className="text">{order}</span>
-          <img src={iconCheck} alt="iconCheck" />
-          {/* !!! 要補 className
-          <svg className="icon cursor-point">
-            <use xlink:href="#svg-icon-pg-complete"></use>
-          </svg> 
-          */}
+          <img src={iconCheck} alt="iconCheck" className="icon cursor-point" />
         </span>
         <span className="progress-label">{label}</span>
       </span>
