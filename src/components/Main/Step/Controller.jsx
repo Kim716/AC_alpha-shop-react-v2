@@ -2,49 +2,36 @@ import React from "react";
 import iconLeftArrow from "../../../assets/icons/iconLeftArrow.svg";
 import iconRightArrow from "../../../assets/icons/iconRightArrow.svg";
 
-function NextButton() {
+function NextButton({ onClick }) {
   return (
-    <button className="next">
+    <button className="next" onClick={onClick}>
       下一步
       <img src={iconRightArrow} alt="iconRightArrow" />
     </button>
   );
 }
-function PrevButton() {
+function PrevButton({ onClick }) {
   return (
-    <button className="prev">
+    <button className="prev" onClick={onClick}>
       上一步
       <img src={iconLeftArrow} alt="iconLeftArrow" />
     </button>
   );
 }
 
-function ButtonGroup({ phase }) {
-  return (
-    <section className="button-group col col-12" data-phase={phase}>
-      {phase !== "address" && <PrevButton />}
-      {phase !== "credit-card" ? (
-        <NextButton />
-      ) : (
-        <button className="next">確認下單</button>
-      )}
-    </section>
-  );
-}
-
-function Controller() {
+function Controller({ phase, onClick }) {
   return (
     <>
       {/* <!-- progress-control --> */}
       <section className="progress-control-container col col-lg-6 col-sm-12">
-        {/* 表單按鈕part1 */}
-        <ButtonGroup phase="address" />
-
-        {/* 表單按鈕part2 */}
-        <ButtonGroup phase="shipping" />
-
-        {/* 表單按鈕part3 */}
-        <ButtonGroup phase="credit-card" />
+        <section className="button-group col col-12" data-phase={phase}>
+          {phase !== "address" && <PrevButton onClick={onClick} />}
+          {phase !== "credit-card" ? (
+            <NextButton onClick={onClick} />
+          ) : (
+            <button className="next">確認下單</button>
+          )}
+        </section>
       </section>
     </>
   );

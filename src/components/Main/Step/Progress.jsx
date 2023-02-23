@@ -28,7 +28,7 @@ function Progress() {
 
         <ProgressGroup phase="shipping" order={2} label="運送方式" />
 
-        <ProgressGroup phase="shipping" order={3} label="付款資訊" />
+        <ProgressGroup phase="credit-card" order={3} label="付款資訊" />
       </section>
     </>
   );
