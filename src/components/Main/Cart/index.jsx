@@ -1,11 +1,5 @@
 import React, { useState } from "react";
 import ProductList from "./ProductList";
-// import cartItems from "../../../constants/cartInitData";
-
-// // 算出目前購物車商品的總價
-// const totalPrice = cartItems
-//   .map((item) => item.price * item.quantity)
-//   .reduce((sum, price) => sum + price, 0);
 
 function CartInfo({ type, title, price }) {
   return (
@@ -17,11 +11,6 @@ function CartInfo({ type, title, price }) {
 }
 
 function Cart({ shipPrice, cartItems, onQuantityChange, total }) {
-  // const [total, setTotal] = useState(totalPrice + shipPrice);
-
-  // const handleChange = (sum) => {
-  //   setTotal(sum);
-  // };
   return (
     <>
       {/* <!-- cart --> */}
