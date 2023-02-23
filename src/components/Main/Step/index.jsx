@@ -5,7 +5,7 @@ import Part2 from "./Part2";
 import Part3 from "./Part3";
 import Controller from "./Controller";
 
-function Step() {
+function Step({ onRadioClick }) {
   const [phase, setPhase] = useState("address");
   const [order, setOrder] = useState(1);
 
@@ -49,7 +49,7 @@ function Step() {
         {/* <!-- register-form --> */}
         <section className="form-container col col-12">
           <Part1 />
-          <Part2 />
+          <Part2 onRadioClick={onRadioClick} />
           <Part3 />
         </section>
         <Controller phase={phase} onClick={handleClick} />

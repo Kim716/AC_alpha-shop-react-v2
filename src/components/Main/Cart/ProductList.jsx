@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import cartItems from "../../../constants/cartInitData";
+
 import iconMinus from "../../../assets/icons/iconMinus.svg";
 import iconPlus from "../../../assets/icons/iconPlus.svg";
 

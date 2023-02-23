@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import ProductList from "./ProductList";
-import cartItems from "../../../constants/cartInitData";
+// import cartItems from "../../../constants/cartInitData";
 
-// 算出目前購物車商品的總價
-const totalPrice = cartItems
-  .map((item) => item.price * item.quantity)
-  .reduce((sum, price) => sum + price, 0);
+// // 算出目前購物車商品的總價
+// const totalPrice = cartItems
+//   .map((item) => item.price * item.quantity)
+//   .reduce((sum, price) => sum + price, 0);
 
 function CartInfo({ type, title, price }) {
   return (
@@ -16,23 +16,23 @@ function CartInfo({ type, title, price }) {
   );
 }
 
-function Cart() {
-  const [total, setTotal] = useState(totalPrice);
+function Cart({ shipPrice, cartItems, onQuantityChange, total }) {
+  // const [total, setTotal] = useState(totalPrice + shipPrice);
 
-  const handleChange = (sum) => {
-    setTotal(sum);
-  };
+  // const handleChange = (sum) => {
+  //   setTotal(sum);
+  // };
   return (
     <>
       {/* <!-- cart --> */}
       <section className="cart-container col col-lg-5 col-sm-12">
         <h3 className="cart-title">購物籃</h3>
         <ProductList
-          onQuantityChange={handleChange}
+          onQuantityChange={onQuantityChange}
           total={total}
           cartItems={cartItems}
         />
-        <CartInfo type="shipping" title="運費" price={123} />
+        <CartInfo type="shipping" title="運費" price={shipPrice} />
         <CartInfo type="total" title="小計" price={total} />
       </section>
     </>

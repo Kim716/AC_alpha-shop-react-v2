@@ -1,6 +1,6 @@
 import React from "react";
 
-function RadioInput({ price, shipType, title, time }) {
+function RadioInput({ price, shipType, title, time, onRadioClick }) {
   return (
     <label className="radio-group col col-12" data-price={price}>
       <input
@@ -8,6 +8,7 @@ function RadioInput({ price, shipType, title, time }) {
         type="radio"
         name="shipping"
         defaultChecked={shipType === "standard" && true}
+        onChange={() => onRadioClick(price)}
       />
       <div className="radio-info">
         <div className="col col-12">
@@ -21,7 +22,7 @@ function RadioInput({ price, shipType, title, time }) {
   );
 }
 
-function Part2() {
+function Part2({ onRadioClick }) {
   return (
     <>
       {/* <!-- shipping phase --> */}
@@ -33,6 +34,7 @@ function Part2() {
             shipType="standard"
             title="標準運送"
             time="約 3~7 個工作天"
+            onRadioClick={onRadioClick}
           />
 
           <RadioInput
@@ -40,6 +42,7 @@ function Part2() {
             shipType="dhl"
             title="DHL 貨運"
             time="48 小時內送達"
+            onRadioClick={onRadioClick}
           />
         </section>
       </form>
