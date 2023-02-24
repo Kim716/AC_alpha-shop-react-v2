@@ -1,72 +1,63 @@
-import React, { useState } from "react";
+import React from "react";
 
 import iconMinus from "../../../assets/icons/iconMinus.svg";
 import iconPlus from "../../../assets/icons/iconPlus.svg";
 
-function Item({ item, onQuantityChange, total }) {
-  const [count, setCount] = useState(item.quantity);
-  const [price, setPrice] = useState(item.price * item.quantity);
+function ProductList({ onQuantityChange, cartItems }) {
+  const handleQuantityClick = (e) => {
+    const targetId = e.target.closest(".product-container").id;
+    const isMinus = e.target.classList.contains("minus");
 
-  const handleMinusClick = (e) => {
-    setCount((c) => {
-      if (c - 1 === 0) {
-        e.target.closest(".product-container").remove();
-        return;
+    const newCartItems = cartItems.map((item) => {
+      // 辨識是哪個商品，做出更新過的資料
+      if (item.id === targetId) {
+        return {
+          ...item,
+          // 判斷是加還是減
+          quantity: isMinus ? item.quantity - 1 : item.quantity + 1,
+        };
       }
-      return c - 1;
+      return item;
     });
-    setPrice(price - item.price);
-    onQuantityChange(total - item.price);
+
+    // 過濾掉數量為0的商品
+    const nextCartItems = newCartItems.filter((item) => item.quantity > 0);
+
+    onQuantityChange(nextCartItems);
   };
 
-  const handlePlusClick = () => {
-    setCount(count + 1);
-    setPrice(price + item.price);
-    onQuantityChange(total + item.price);
-  };
-
-  return (
-    <div
-      className="product-container col col-12"
-      data-count={item.quantity}
-      data-price={item.price}
-    >
-      <img className="img-container" src={item.img} alt={item.name} />
-      <div className="product-info">
-        <div className="product-name">{item.name}</div>
-        <div className="product-control-container">
-          <div className="product-control">
-            <img
-              src={iconMinus}
-              alt="iconMinus"
-              className="product-action minus"
-              onClick={handleMinusClick}
-            />
-            {/* <span className="product-count">{item.quantity}</span> */}
-            <span className="product-count">{count}</span>
-            <img
-              src={iconPlus}
-              alt="iconPlus"
-              className="product-action plus"
-              onClick={handlePlusClick}
-            />
-          </div>
-        </div>
-        <div className="price">{price}</div>
-      </div>
-    </div>
-  );
-}
-
-function ProductList({ onQuantityChange, total, cartItems }) {
   const listItems = cartItems.map((item) => {
     return (
-      <Item
-        item={item}
-        key={item.id}
-        onQuantityChange={onQuantityChange}
-        total={total}
-      />
+      <div
+        className="product-container col col-12"
+        data-count={item.quantity}
+        data-price={item.price}
+        id={item.id}
+        key={item.id} // 不會出現在 DOM
+      >
+        <img className="img-container" src={item.img} alt={item.name} />
+        <div className="product-info">
+          <div className="product-name">{item.name}</div>
+          <div className="product-control-container">
+            <div className="product-control">
+              <img
+                src={iconMinus}
+                alt="iconMinus"
+                className="product-action minus"
+                onClick={handleQuantityClick}
+              />
+              <span className="product-count">{item.quantity}</span>
+              <img
+                src={iconPlus}
+                alt="iconPlus"
+                className="product-action plus"
+                onClick={handleQuantityClick}
+              />
+            </div>
+          </div>
+          <div className="price">{item.quantity * item.price}</div>
+        </div>
+      </div>
     );
   });
 

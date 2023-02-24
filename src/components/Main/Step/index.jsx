@@ -5,36 +5,34 @@ import Part2 from "./Part2";
 import Part3 from "./Part3";
 import Controller from "./Controller";
 
-function Step({ onRadioClick }) {
+function Step({ onRadioChange }) {
   const [phase, setPhase] = useState("address");
   const [order, setOrder] = useState(1);
 
   const handleClick = (e) => {
     const btnPhase = e.target.parentElement.dataset.phase;
+    console.log(order);
 
     // 控制下一步的按鈕
     if (e.target.className === "next") {
       if (btnPhase === "address") {
         setPhase("shopping");
-        setOrder(order + 1);
       }
       if (btnPhase === "shopping") {
         setPhase("credit-card");
-        setOrder(order + 1);
       }
-
+      setOrder((o) => o + 1);
       return;
     }
 
     // 控制上一步的按鈕
     if (btnPhase === "shopping") {
       setPhase("address");
-      setOrder(order - 1);
     }
     if (btnPhase === "credit-card") {
       setPhase("shopping");
-      setOrder(order - 1);
     }
+    setOrder((o) => o - 1);
   };
 
   return (
@@ -49,7 +47,7 @@ function Step({ onRadioClick }) {
         {/* <!-- register-form --> */}
         <section className="form-container col col-12">
           <Part1 />
-          <Part2 onRadioClick={onRadioClick} />
+          <Part2 onRadioChange={onRadioChange} />
           <Part3 />
         </section>
         <Controller phase={phase} onClick={handleClick} />

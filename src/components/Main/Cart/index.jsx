@@ -10,7 +10,13 @@ function CartInfo({ type, title, price }) {
   );
 }
 
-function Cart({ shipPrice, cartItems, onQuantityChange, total }) {
+function Cart({ shipPrice, cartItems, onQuantityChange }) {
+  // 算出目前購物車商品的總價
+  const totalPrice =
+    cartItems
+      .map((item) => item.price * item.quantity)
+      .reduce((sum, price) => sum + price, 0) + shipPrice;
+
   return (
     <>
       {/* <!-- cart --> */}
@@ -18,11 +24,10 @@ function Cart({ shipPrice, cartItems, onQuantityChange, total }) {
         <h3 className="cart-title">購物籃</h3>
         <ProductList
           onQuantityChange={onQuantityChange}
-          total={total}
           cartItems={cartItems}
         />
         <CartInfo type="shipping" title="運費" price={shipPrice} />
-        <CartInfo type="total" title="小計" price={total} />
+        <CartInfo type="total" title="小計" price={totalPrice} />
       </section>
     </>
   );
