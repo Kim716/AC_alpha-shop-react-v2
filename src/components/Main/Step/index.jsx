@@ -11,7 +11,6 @@ function Step({ onRadioChange }) {
 
   const handleClick = (e) => {
     const btnPhase = e.target.parentElement.dataset.phase;
-    console.log(order);
 
     // 控制下一步的按鈕
     if (e.target.className === "next") {
