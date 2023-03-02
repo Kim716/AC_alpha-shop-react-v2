@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 
+// Data
 import iconMinus from "../../../assets/icons/iconMinus.svg";
 import iconPlus from "../../../assets/icons/iconPlus.svg";
+import CartContext from "../../../constants/CartContext";
 
-function ProductList({ onQuantityChange, cartItems }) {
+function ProductList({ onQuantityChange }) {
+  const cartItems = useContext(CartContext);
+
   const handleQuantityClick = (e) => {
     const targetId = e.target.closest(".product-container").id;
     const isMinus = e.target.classList.contains("minus");
