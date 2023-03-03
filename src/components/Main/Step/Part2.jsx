@@ -1,12 +1,10 @@
 import React, { useContext } from "react";
 
 // Data
-// ***************＊ 為了更新 OrderMessage 的 totalPrice 而加的
 import CartContext from "../../../constants/CartContext";
 import OrderContext from "../../../constants/OrderContext";
 
 function RadioInput({ shipPrice, shipType, title, time, onRadioChange }) {
-  // ***************＊
   const cartItems = useContext(CartContext);
   const { handleOrderMessageChange } = useContext(OrderContext);
 
@@ -19,14 +17,15 @@ function RadioInput({ shipPrice, shipType, title, time, onRadioChange }) {
         defaultChecked={shipType === "standard" && true}
         onChange={() => {
           onRadioChange(shipPrice);
-          handleOrderMessageChange(shipType, "shipping_type");
 
-          // ***************＊
-          const totalPrice =
-            cartItems
-              .map((item) => item.price * item.quantity)
-              .reduce((sum, price) => sum + price, 0) + shipPrice;
-          handleOrderMessageChange(totalPrice, "total_price");
+          // 更改 OrderMessage
+          handleOrderMessageChange(shipType, "shipping_type");
+          handleOrderMessageChange(
+            "calculateInMain",
+            "total_price",
+            cartItems,
+            shipPrice
+          );
         }}
       />
       <div className="radio-info">

@@ -33,12 +33,13 @@ function ProductList({ onQuantityChange, shipPrice }) {
 
     onQuantityChange(nextCartItems);
 
-    // ***************＊
-    const totalPrice =
-      nextCartItems
-        .map((item) => item.price * item.quantity)
-        .reduce((sum, price) => sum + price, 0) + shipPrice;
-    handleOrderMessageChange(totalPrice, "total_price");
+    // 更新 OrderMessage
+    handleOrderMessageChange(
+      "calculating",
+      "total_price",
+      nextCartItems,
+      shipPrice
+    );
   };
 
   const listItems = cartItems.map((item) => {

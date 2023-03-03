@@ -13,7 +13,20 @@ function Main() {
   const [shipPrice, setShipPrice] = useState(0);
   const [orderMessage, setOrderMessage] = useState(useContext(OrderContext));
 
-  const handleOrderMessageChange = (value, orderId) => {
+  const handleOrderMessageChange = (value, orderId, cartItems, shipPrice) => {
+    if (orderId === "total_price") {
+      // 算出目前購物車商品的總價
+      const totalPrice =
+        cartItems
+          .map((item) => item.price * item.quantity)
+          .reduce((sum, price) => sum + price, 0) + shipPrice;
+
+      setOrderMessage((om) => {
+        return { ...om, [orderId]: totalPrice };
+      });
+      return;
+    }
+
     // 因為在 shipping type 那邊會更新兩筆資料，所以這樣寫才可以承先啟後
     setOrderMessage((om) => {
       return { ...om, [orderId]: value };

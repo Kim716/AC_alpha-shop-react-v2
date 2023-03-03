@@ -4,8 +4,7 @@ import React, { useContext } from "react";
 import ProductList from "./ProductList";
 
 // Data
-import CartContext from "../../../constants/CartContext";
-// import OrderContext from "../../../constants/OrderContext";
+import OrderContext from "../../../constants/OrderContext";
 
 function CartInfo({ type, title, price }) {
   return (
@@ -17,13 +16,7 @@ function CartInfo({ type, title, price }) {
 }
 
 function Cart({ onQuantityChange, shipPrice }) {
-  const cartItems = useContext(CartContext);
-
-  // 算出目前購物車商品的總價
-  const totalPrice =
-    cartItems
-      .map((item) => item.price * item.quantity)
-      .reduce((sum, price) => sum + price, 0) + shipPrice;
+  const { orderMessage } = useContext(OrderContext);
 
   return (
     <>
@@ -35,7 +28,7 @@ function Cart({ onQuantityChange, shipPrice }) {
           shipPrice={shipPrice}
         />
         <CartInfo type="shipping" title="運費" price={shipPrice} />
-        <CartInfo type="total" title="小計" price={totalPrice} />
+        <CartInfo type="total" title="小計" price={orderMessage.total_price} />
       </section>
     </>
   );
