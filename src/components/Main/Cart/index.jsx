@@ -18,15 +18,12 @@ function CartInfo({ type, title, price }) {
 
 function Cart({ onQuantityChange, shipPrice }) {
   const cartItems = useContext(CartContext);
-  // const { handleOrderMessageChange } = useContext(OrderContext);
 
   // 算出目前購物車商品的總價
   const totalPrice =
     cartItems
       .map((item) => item.price * item.quantity)
       .reduce((sum, price) => sum + price, 0) + shipPrice;
-
-  // handleOrderMessageChange(totalPrice, "totalPrice");
 
   return (
     <>
