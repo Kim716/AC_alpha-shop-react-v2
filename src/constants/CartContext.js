@@ -20,3 +20,4 @@ const cartItems = [
 const CartContext = createContext(cartItems);
 
 export default CartContext;
+export { cartItems };

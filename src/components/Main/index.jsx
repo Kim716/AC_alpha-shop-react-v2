@@ -6,10 +6,19 @@ import Cart from "./Cart";
 
 // Data
 import CartContext from "../../constants/CartContext";
+import OrderContext from "../../constants/OrderContext";
 
 function Main() {
   const [cartItems, setCartItems] = useState(useContext(CartContext));
   const [shipPrice, setShipPrice] = useState(0);
+  const [orderMessage, setOrderMessage] = useState(useContext(OrderContext));
+
+  const handleOrderMessageChange = (value, orderId) => {
+    // 因為在 shipping type 那邊會更新兩筆資料，所以這樣寫才可以承先啟後
+    setOrderMessage((om) => {
+      return { ...om, [orderId]: value };
+    });
+  };
 
   const handleRadioChange = (price) => {
     setShipPrice(price);
@@ -23,14 +32,18 @@ function Main() {
     <>
       <main className="site-main">
         <div className="main-container">
-          <Step onRadioChange={handleRadioChange} />
+          <OrderContext.Provider
+            value={{ orderMessage, handleOrderMessageChange }}
+          >
+            <CartContext.Provider value={cartItems}>
+              <Step onRadioChange={handleRadioChange} />
 
-          <CartContext.Provider value={cartItems}>
-            <Cart
-              shipPrice={shipPrice}
-              onQuantityChange={handleQuantityClick}
-            />
-          </CartContext.Provider>
+              <Cart
+                shipPrice={shipPrice}
+                onQuantityChange={handleQuantityClick}
+              />
+            </CartContext.Provider>
+          </OrderContext.Provider>
         </div>
       </main>
     </>

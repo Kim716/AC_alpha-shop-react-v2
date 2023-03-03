@@ -1,18 +1,36 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+
+// Data
 import { appellations, county } from "../../../constants/formdata";
+import OrderContext from "../../../constants/OrderContext";
 
 function Input({ inputID, label, type, placeholder }) {
+  const [value, setValue] = useState("");
+  const { handleOrderMessageChange } = useContext(OrderContext);
+
   return (
     <>
       <label htmlFor={inputID} className="input-label">
         {label}
       </label>
-      <input type={type} placeholder={placeholder} id={inputID} />
+      <input
+        value={value}
+        onChange={(e) => {
+          setValue(e.target.value);
+          handleOrderMessageChange(e.target.value, inputID);
+        }}
+        type={type}
+        placeholder={placeholder}
+        id={inputID}
+      />
     </>
   );
 }
 
 function Select({ selectID, label, optionData }) {
+  const [value, setValue] = useState("");
+  const { handleOrderMessageChange } = useContext(OrderContext);
+
   const optionList = optionData.map((option) => (
     <option
       key={option.value}
@@ -29,7 +47,15 @@ function Select({ selectID, label, optionData }) {
         {label}
       </div>
       <div className="select-container">
-        <select id={selectID} defaultValue="" required>
+        <select
+          id={selectID}
+          required
+          value={value}
+          onChange={(e) => {
+            setValue(e.target.value);
+            handleOrderMessageChange(e.target.value, selectID);
+          }}
+        >
           {optionList}
         </select>
       </div>

@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
+
+// Data
 import iconLeftArrow from "../../../assets/icons/iconLeftArrow.svg";
 import iconRightArrow from "../../../assets/icons/iconRightArrow.svg";
+import OrderContext from "../../../constants/OrderContext";
 
 function NextButton({ onClick }) {
   return (
@@ -20,6 +23,12 @@ function PrevButton({ onClick }) {
 }
 
 function Controller({ phase, onClick }) {
+  const { orderMessage } = useContext(OrderContext);
+
+  const handleSubmit = () => {
+    console.log(orderMessage);
+  };
+
   return (
     <>
       {/* <!-- progress-control --> */}
@@ -29,7 +38,9 @@ function Controller({ phase, onClick }) {
           {phase !== "credit-card" ? (
             <NextButton onClick={onClick} />
           ) : (
-            <button className="next">確認下單</button>
+            <button className="next" onClick={handleSubmit}>
+              確認下單
+            </button>
           )}
         </section>
       </section>

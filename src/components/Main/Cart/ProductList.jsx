@@ -4,9 +4,13 @@ import React, { useContext } from "react";
 import iconMinus from "../../../assets/icons/iconMinus.svg";
 import iconPlus from "../../../assets/icons/iconPlus.svg";
 import CartContext from "../../../constants/CartContext";
+// ***************＊
+import OrderContext from "../../../constants/OrderContext";
 
-function ProductList({ onQuantityChange }) {
+function ProductList({ onQuantityChange, shipPrice }) {
   const cartItems = useContext(CartContext);
+  // ***************＊
+  const { handleOrderMessageChange } = useContext(OrderContext);
 
   const handleQuantityClick = (e) => {
     const targetId = e.target.closest(".product-container").id;
@@ -28,6 +32,13 @@ function ProductList({ onQuantityChange }) {
     const nextCartItems = newCartItems.filter((item) => item.quantity > 0);
 
     onQuantityChange(nextCartItems);
+
+    // ***************＊
+    const totalPrice =
+      nextCartItems
+        .map((item) => item.price * item.quantity)
+        .reduce((sum, price) => sum + price, 0) + shipPrice;
+    handleOrderMessageChange(totalPrice, "total_price");
   };
 
   const listItems = cartItems.map((item) => {

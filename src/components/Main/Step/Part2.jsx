@@ -1,14 +1,33 @@
-import React from "react";
+import React, { useContext } from "react";
 
-function RadioInput({ price, shipType, title, time, onRadioChange }) {
+// Data
+// ***************＊ 為了更新 OrderMessage 的 totalPrice 而加的
+import CartContext from "../../../constants/CartContext";
+import OrderContext from "../../../constants/OrderContext";
+
+function RadioInput({ shipPrice, shipType, title, time, onRadioChange }) {
+  // ***************＊
+  const cartItems = useContext(CartContext);
+  const { handleOrderMessageChange } = useContext(OrderContext);
+
   return (
-    <label className="radio-group col col-12" data-price={price}>
+    <label className="radio-group col col-12" data-price={shipPrice}>
       <input
         id={`shipping-${shipType}`}
         type="radio"
         name="shipping"
         defaultChecked={shipType === "standard" && true}
-        onChange={() => onRadioChange(price)}
+        onChange={() => {
+          onRadioChange(shipPrice);
+          handleOrderMessageChange(shipType, "shipping_type");
+
+          // ***************＊
+          const totalPrice =
+            cartItems
+              .map((item) => item.price * item.quantity)
+              .reduce((sum, price) => sum + price, 0) + shipPrice;
+          handleOrderMessageChange(totalPrice, "total_price");
+        }}
       />
       <div className="radio-info">
         <div className="col col-12">
@@ -30,7 +49,7 @@ function Part2({ onRadioChange }) {
         <h3 className="form-title">運送方式</h3>
         <section className="form-body col col-12">
           <RadioInput
-            price={0}
+            shipPrice={0}
             shipType="standard"
             title="標準運送"
             time="約 3~7 個工作天"
@@ -38,7 +57,7 @@ function Part2({ onRadioChange }) {
           />
 
           <RadioInput
-            price={500}
+            shipPrice={500}
             shipType="dhl"
             title="DHL 貨運"
             time="48 小時內送達"
