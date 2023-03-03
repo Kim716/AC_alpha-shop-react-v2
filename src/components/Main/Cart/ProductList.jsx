@@ -4,12 +4,10 @@ import React, { useContext } from "react";
 import iconMinus from "../../../assets/icons/iconMinus.svg";
 import iconPlus from "../../../assets/icons/iconPlus.svg";
 import CartContext from "../../../constants/CartContext";
-// ***************＊
 import OrderContext from "../../../constants/OrderContext";
 
 function ProductList({ onQuantityChange, shipPrice }) {
   const cartItems = useContext(CartContext);
-  // ***************＊
   const { handleOrderMessageChange } = useContext(OrderContext);
 
   const handleQuantityClick = (e) => {
